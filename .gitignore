@@ -1,0 +1,12 @@
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+.validation-deps/
+__pycache__/
+*.log

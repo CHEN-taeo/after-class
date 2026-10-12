@@ -1,0 +1,36 @@
+name: Native iOS build and tests
+on:
+  workflow_dispatch:
+  push:
+    paths: ['App/**', 'Tests/**', 'AfterClass.xcodeproj/**', '.github/workflows/ios.yml']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select available iPhone simulator
+        run: |
+          xcodebuild -version
+          xcrun simctl list devices available -j > /tmp/afterclass-devices.json
+          python3 - <<'PY' >> "$GITHUB_ENV"
+          import json
+          data = json.load(open('/tmp/afterclass-devices.json'))
+          phones = [d for runtime, devices in data['devices'].items() if 'iOS' in runtime for d in devices if 'iPhone' in d['name'] and d['isAvailable']]
+          if not phones:
+              raise SystemExit('No available iPhone simulator')
+          print('SIMULATOR_ID=' + phones[0]['udid'])
+          PY
+      - name: Build and test (no signing)
+        run: |
+          set -o pipefail
+          xcodebuild -project AfterClass.xcodeproj -scheme AfterClass -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO test
+      - name: Save test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-test-results
+          path: build/Tests.xcresult

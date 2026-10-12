@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f6ef"><title>下课见 · 一点小小的陪伴</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page-shell">
+  <header class="studio-header"><a class="wordmark" href="/" aria-label="下课见首页"><span class="brand-mark">⌁</span> 下课见 <span class="english">AFTER CLASS</span></a><span class="preview-tag"><i></i> iPhone 交互设计预览</span></header>
+  <main class="showcase">
+    <section class="intro">
+      <p class="eyebrow">EVERY CLASS HAS ITS OWN SHAPE</p>
+      <h1>上课各忙，<br><span>下课再见。</span><svg viewBox="0 0 130 16" aria-hidden="true"><path d="M3 10 Q55 0 127 9 M17 14 Q64 5 115 12"/></svg></h1>
+      <p class="intro-copy">每门课都有一个尚未完成的人物。<br>上课时，它安静地成为这门学科；<br>下课后，它才转过身来见你。</p>
+      <div class="little-note"><span>○</span><p>圆还没合上，<br>我们下课见。</p><span class="note-sign">— 规</span></div>
+      <div class="try-it"><span class="scribble-arrow">↗</span><p>把演示时间调到课程中与下课后。<br><small>看看器物怎样成为人物。</small></p></div>
+      <div class="build-note"><b>关于这个预览</b><p>这里可体验离线互动和课表编辑。真正的 iPhone 工程已另外生成；本页不是 iOS 模拟器，也不会发送 AI 请求。</p><a href="/README" target="_blank" rel="noopener">查看首版说明 <span>↗</span></a></div>
+    </section>
+    <section class="phone-stage" aria-label="iPhone 界面预览">
+      <div class="float-note top-note">角色就是时间本身 <span>↘</span></div>
+      <div class="phone">
+        <div class="status-bar" aria-hidden="true"><span>9:41</span><span class="island"></span><span>▮▮▮  ▰</span></div>
+        <div class="app-scroll" id="appScroll">
+          <section class="screen" id="todayScreen">
+            <header class="app-heading"><div><p id="dateLabel" class="date-label"></p><h2>下课见<span class="tiny-flower">✳</span></h2></div><button class="icon-button" id="settingsButton" aria-label="打开设置"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M9 4v6M15 14v6"/></svg></button></header>
+            <div class="greeting-label"><span class="online-dot"></span>每节课都有自己的形状 <span class="week-tag" id="weekLabel">本周示例</span></div>
+            <div class="preview-clock"><label for="previewTime">演示时间</label><input id="previewTime" type="time" aria-label="演示时间"><button id="liveClock" type="button">回到实时</button><span id="clockMode">实时 · 不修改课表</span></div>
+            <section class="moment-card" id="momentCard" aria-label="此刻的课程"></section>
+            <figure class="subject-stage" id="subjectStage">
+              <div class="stage-heading"><span id="characterName">今日角色</span><span id="stagePhase">等待课程</span></div>
+              <button class="character-button" id="characterButton" aria-label="和当前学科角色打招呼">
+                <span id="characterMount" aria-hidden="true"></span>
+              </button>
+              <figcaption id="characterCaption" aria-live="polite">下一节课的角色正在准备。</figcaption>
+            </figure>
+            <div class="section-heading"><h3>今天的安排</h3><span id="courseCount"></span></div>
+            <div id="todayCourses" class="courses"></div>
+            <button class="chat-prompt" id="chatPrompt"><span id="chatPromptLabel">和今天的角色说两句</span><span>↗</span></button>
+            <p class="sample-foot">示例课表 · 离线互动预览</p>
+          </section>
+          <section class="screen" id="timetableScreen" hidden>
+            <header class="app-heading"><div><p class="date-label">TIME, WITH A LITTLE ROOM TO BREATHE</p><h2>你的课表</h2></div><button class="icon-button add-button" id="addCourse" aria-label="添加课程">＋</button></header>
+            <p class="subline">留一点时间发呆。</p><div class="day-strip" id="dayStrip" role="group" aria-label="选择星期"></div>
+            <div class="section-heading"><h3 id="selectedDayTitle"></h3><span>点击课程可编辑</span></div><div id="dayCourses" class="courses"></div>
+            <p class="sample-foot">预览数据只保存在当前浏览器</p>
+          </section>
+          <section class="screen chat-screen" id="chatScreen" hidden>
+            <header class="app-heading"><div><p class="date-label">I'M HERE, NO RUSH</p><h2>说两句</h2></div><button class="icon-button" id="clearChat" aria-label="清空聊天记录">⌫</button></header>
+            <p class="chat-status"><i></i> 今天的角色在这里 <span>离线互动</span></p>
+            <div class="messages" id="messages" aria-live="polite"></div>
+            <form class="chat-form" id="chatForm"><label class="sr-only" for="chatInput">发送消息给今天的角色</label><input id="chatInput" placeholder="今天过得怎么样？" maxlength="2000" autocomplete="off"><button type="submit" aria-label="发送消息">↑</button></form>
+          </section>
+        </div>
+        <nav class="tab-bar" aria-label="主导航">
+          <button data-tab="today" class="active" aria-current="page"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><span>今天</span><i></i></button>
+          <button data-tab="timetable"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M4 10h16M10 4v16"/></svg><span>课表</span><i></i></button>
+          <button data-tab="chat"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-2 2V11.5a8.5 8.5 0 0 1 17 0Z"/><path d="M8 11h.1m4 0h.1m4 0h.1"/></svg><span>说两句</span><i></i></button>
+        </nav><div class="home-indicator" aria-hidden="true"></div>
+      </div><p class="under-phone">上课各忙，下课再见。</p>
+    </section>
+  </main>
+  <footer class="studio-footer"><span>下课见 / SUBJECT CHARACTER STUDY</span><span>规 · 折 · 逗 / 原创原型</span></footer>
+</div>
+<dialog id="settingsDialog"><form method="dialog" class="dialog-inner"><div class="dialog-heading"><h2>一点小设置</h2><button class="icon-button" aria-label="关闭设置">×</button></div><p>当前是浏览器离线设计预览。</p><div class="info-box"><b>AI 在原生 App 中接通</b><p>原生版支持填写 HTTPS 接口地址、模型名称和密钥。密钥保存在 iPhone 钥匙串；这里不收集密钥。</p></div><p class="small-copy">本轮用原创线条角色测试“上课是器物，下课成为人物”。浏览器展示的是设计原型，不是 iOS 模拟器。</p><button class="primary-button">知道了</button></form></dialog>
+<dialog id="courseDialog"><form id="courseForm" class="dialog-inner"><div class="dialog-heading"><h2 id="editorTitle">新的一门课</h2><button type="button" class="icon-button" id="closeEditor" aria-label="取消编辑">×</button></div><label>课程名称<input id="courseTitle" required maxlength="60" placeholder="例如：机械原理"></label><label>教室 / 地点<input id="courseRoom" maxlength="80" placeholder="例如：教学楼 A · 302"></label><div class="field-row"><label>开始时间<input id="courseStart" type="time" required></label><label>结束时间<input id="courseEnd" type="time" required></label></div><label>课程颜色<select id="courseColor"><option value="0">鼠尾草绿</option><option value="1">浅杏</option><option value="2">淡紫</option><option value="3">雾蓝</option></select></label><p id="courseError" class="error" role="alert"></p><div class="editor-actions"><button type="button" id="deleteCourse" class="danger-button">删除课程</button><button class="primary-button" type="submit">保存这门课</button></div></form></dialog>
+<dialog id="clearDialog"><form method="dialog" class="dialog-inner"><h2>清空聊天记录？</h2><p>这会删除当前浏览器里保存的对话。</p><div class="editor-actions"><button value="cancel" class="secondary-button">取消</button><button value="clear" class="primary-button">清空</button></div></form></dialog>
+<script src="app.js" defer></script>
+</body></html>

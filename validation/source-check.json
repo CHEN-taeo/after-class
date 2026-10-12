@@ -1,0 +1,9 @@
+{
+  "swift_files": 13,
+  "swift_grammar_errors": [],
+  "project_objects": 57,
+  "native_compilation": "NOT RUN: Windows host has no Xcode",
+  "native_tests": "NOT RUN: requires iOS simulator",
+  "live_ai": "NOT RUN: no user API configuration",
+  "passed": true
+}

@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": [
+    "before class shows the subject character",
+    "character answers a tap while off class",
+    "class start removes eyes and disables social interaction",
+    "character drawing follows course progress",
+    "break hands the stage to the next subject",
+    "last subject becomes a character after class",
+    "featured course is not duplicated below",
+    "invalid end time blocked",
+    "course create",
+    "course persistence and edit",
+    "course delete",
+    "offline chat is restrained and labeled",
+    "chat persistence",
+    "chat renders input as plain text",
+    "clear cancel preserves data",
+    "clear confirmed",
+    "preview does not collect credentials",
+    "no horizontal overflow at 375px",
+    "no horizontal overflow at 390px",
+    "no horizontal overflow at 430px",
+    "reduced motion respected",
+    "no browser JavaScript exceptions"
+  ]
+}
