@@ -25,6 +25,8 @@ jobs:
           print('SIMULATOR_ID=' + phones[0]['udid'])
           PY
           echo "SIMULATOR_ARCH=$(uname -m)" >> "$GITHUB_ENV"
+      - name: Boot selected simulator
+        run: |
           xcrun simctl boot "$SIMULATOR_ID" || true
           xcrun simctl bootstatus "$SIMULATOR_ID" -b
       - name: Build and test (no signing)
