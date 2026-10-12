@@ -27,7 +27,7 @@ jobs:
       - name: Build and test (no signing)
         run: |
           set -o pipefail
-          xcodebuild -project AfterClass.xcodeproj -scheme AfterClass -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO test
+          xcodebuild -project AfterClass.xcodeproj -scheme AfterClass -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=YES test
       - name: Save test results
         if: always()
         uses: actions/upload-artifact@v4
