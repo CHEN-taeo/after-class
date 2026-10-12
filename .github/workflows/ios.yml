@@ -24,10 +24,13 @@ jobs:
               raise SystemExit('No available iPhone simulator')
           print('SIMULATOR_ID=' + phones[0]['udid'])
           PY
+          echo "SIMULATOR_ARCH=$(uname -m)" >> "$GITHUB_ENV"
+          xcrun simctl boot "$SIMULATOR_ID" || true
+          xcrun simctl bootstatus "$SIMULATOR_ID" -b
       - name: Build and test (no signing)
         run: |
           set -o pipefail
-          xcodebuild -project AfterClass.xcodeproj -scheme AfterClass -destination "platform=iOS Simulator,id=$SIMULATOR_ID" -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=YES test
+          xcodebuild -project AfterClass.xcodeproj -scheme AfterClass -destination "platform=iOS Simulator,id=$SIMULATOR_ID,arch=$SIMULATOR_ARCH" -resultBundlePath build/Tests.xcresult CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=YES test
       - name: Save test results
         if: always()
         uses: actions/upload-artifact@v4
